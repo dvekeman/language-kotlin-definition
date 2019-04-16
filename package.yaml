@@ -1,0 +1,25 @@
+name: language-kotlin-definition
+version: '0.0.1'
+synopsis: A library for working with Kotlin Definition files
+description: A library for working with Kotlin Definition files
+category: Language
+author: Dieter Vekeman <dieter.vekeman@gmail.com>
+maintainer: Dieter Vekeman <dieter.vekeman@gmail.com>
+copyright: (c) Dieter Vekeman 2019
+license: Apache-2.0
+homepage: http://github.com/dvekeman/language-kotlin-defintion
+dependencies:
+- base >=3 && <=5
+- containers
+- parsec
+- pretty
+- array
+library:
+  source-dirs: src
+  ghc-options:
+    - -Wall
+  exposed-modules:
+  - Language.Kotlin
+  - Language.Kotlin.Types
+  - Language.Kotlin.Definition.Pretty
+stability: experimental

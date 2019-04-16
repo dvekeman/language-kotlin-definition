@@ -1,0 +1,8 @@
+dist
+*.o
+*.hi
+*.lksh*
+
+.stack-work/
+language-kotlin-definition.cabal
+*~
