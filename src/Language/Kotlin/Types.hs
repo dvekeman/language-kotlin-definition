@@ -42,6 +42,7 @@ data DeclarationElement
   | TypeAliasDeclaration CommentPlaceholder (Maybe Exported) TypeAlias
   | ExportDeclaration String
   | AmbientDeclaration CommentPlaceholder (Maybe Exported) Ambient
+  | Unsupported String
   deriving (Eq, Show, Data, Typeable)
 
 data Exported = Exported deriving (Eq, Show, Data, Typeable)

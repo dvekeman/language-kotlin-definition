@@ -11,3 +11,5 @@ Branched from `language-typescript` (needs a big cleanup)
 
 **experimental**
 
+Will not be published or maintained further.
+

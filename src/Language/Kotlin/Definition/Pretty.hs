@@ -37,23 +37,27 @@ renderDeclarationSourceFile qualifier els =
 
 declarationSourceFile :: String -> [DeclarationElement] -> Doc
 declarationSourceFile qualifier elements =
-  text "@file:JsQualifier" <> parens (text "\"" <> text qualifier <> text "\"")
-    $$ vcat (map declarationElement elements)
+  if not $ null qualifier
+  then text "@file:JsQualifier" <> parens (text "\"" <> text qualifier <> text "\"")
+  else mempty
+  $$ vcat (map declarationElement elements)
 
 declarationElement :: DeclarationElement -> Doc
 declarationElement (InterfaceDeclaration _ e i) =
-  renderMaybe exported e
-  <+> interface i
+  {-renderMaybe exported e
+  <+> -}interface i
 declarationElement (ExportDeclaration name) =
   exported Exported
   <+> text "="
   <+> text name
 declarationElement (AmbientDeclaration _ e a) =
-  renderMaybe exported e
-  <+> renderAmbientDeclaration a
+  {-renderMaybe exported e
+  <+> -}renderAmbientDeclaration a
 declarationElement (TypeAliasDeclaration _ e a) =
-  renderMaybe exported e
-  <+> renderTypeAlias a
+  {-renderMaybe exported e
+  <+> -}renderTypeAlias a
+declarationElement (Unsupported s) =
+  text "//" <+> text s
 
 renderAmbientClassDeclaration :: Ambient -> Doc
 renderAmbientClassDeclaration (AmbientClassDeclaration comment name ps exts imps els) =
@@ -248,12 +252,7 @@ renderIndexSignature (IndexSignature s sn ty) =
 
 renderTypeAlias :: TypeAlias -> Doc
 renderTypeAlias (TypeAlias _ name ty) =
-  text "/*"
-  $$ text "type"
-  <+> text name
-  <+> text "="
-  <+> type_ Nothing ty
-  $$ text "*/"
+  text "// typealias" <+> text name <+> text "=" <+> type_ Nothing ty
 
 dot :: Doc
 dot = char '.'
